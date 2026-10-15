@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Alejandro Fernández Urbano · Portafolio">
+<meta property="og:description" content="Power Platform, Power BI, .NET, Python e IA en producción para salud, banca, farma y retail.">
+<meta property="og:image" content="https://alejandrofernandezurbano.github.io/img/turnos-malla.jpg">
+<title>Alejandro Fernández Urbano · Portafolio</title>
+<meta name="description" content="Ingeniero mecatrónico: apps en Power Platform, automatización, Power BI, .NET, Python e IA en producción para salud, banca, farma, retail y auditoría.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: hero + cifras, barra de filtros fija y rejilla de tarjetas; cada tarjeta abre un caso a pantalla completa con carrusel. Marca: negro + amarillo. */
+:root {
+  --paper: #F7F5EC; --ink: #16150F; --muted: #67634F; --line: #E2DCC4; --panel: #FFFFFF;
+  --sun: #F2C230; --sun-ink: #16150F; --shadow: 0 1px 2px rgba(22,21,15,.06), 0 8px 24px rgba(22,21,15,.08);
+  --f-display: 'Bebas Neue', Impact, 'Arial Narrow', sans-serif;
+  --f-body: 'IBM Plex Sans', 'Segoe UI', Arial, sans-serif;
+  --f-mono: 'JetBrains Mono', Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #11100B; --ink: #F2EFE3; --muted: #A9A48E; --line: #2C2A20; --panel: #1A1912; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.45); color-scheme: dark } }
+:root[data-theme="dark"] {
+  --paper: #11100B; --ink: #F2EFE3; --muted: #A9A48E; --line: #2C2A20; --panel: #1A1912; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.45); color-scheme: dark }
+
+* { box-sizing: border-box }
+html { scroll-behavior: smooth }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.6 var(--f-body) }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 40px); padding-block: 0 }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 400; letter-spacing: .5px; line-height: .95; margin: 0; text-wrap: balance }
+a { color: inherit; text-decoration-color: var(--sun); text-decoration-thickness: 3px; text-underline-offset: 3px }
+:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px }
+.kicker { font: 600 12px/1.2 var(--f-body); letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted) }
+
+/* ---------- hero ---------- */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(24px, 5vw, 64px); align-items: center; padding-block: clamp(36px, 7vw, 84px) 36px }
+.hero h1 { font-size: clamp(54px, 9vw, 112px); margin-top: 14px }
+.hero h1 span { background: linear-gradient(transparent 62%, var(--sun) 62% 92%, transparent 92%) }
+.hero p { max-width: 58ch; font-size: 18px; color: var(--muted); margin: 18px 0 0 }
+.hero p b { color: var(--ink); font-weight: 600 }
+.photo { width: clamp(150px, 22vw, 240px); aspect-ratio: 1; border-radius: 50%; object-fit: cover; border: 6px solid var(--sun); max-width: 100% }
+.cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 10px; font: 600 15px/1 var(--f-body); text-decoration: none; border: 2px solid var(--ink); color: var(--ink); background: transparent; cursor: pointer }
+.btn.solid { background: var(--sun); color: var(--sun-ink); border-color: var(--sun) }
+.btn:hover { transform: translateY(-1px) }
+
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-block: 2px solid var(--ink) }
+.stat { padding: 20px 18px; border-left: 1px solid var(--line) }
+.stat:first-child { border-left: 0 }
+.stat b { display: block; font: 400 clamp(36px, 5vw, 52px)/1 var(--f-display); font-variant-numeric: tabular-nums }
+.stat span { font-size: 14px; color: var(--muted) }
+
+/* ---------- filtros ---------- */
+.projects { padding-block: 56px 24px }
+.projects-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 24px; margin-bottom: 18px }
+.projects-head h2 { font-size: clamp(44px, 6vw, 68px) }
+.filters { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper); padding-block: 12px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; border-bottom: 1px solid var(--line); margin-bottom: 26px }
+.filter { border: 2px solid var(--ink); background: transparent; color: var(--ink); border-radius: 999px; padding: 8px 14px; font: 600 14px/1 var(--f-body); cursor: pointer; display: inline-flex; gap: 8px; align-items: center }
+.filter .n { font: 600 12px/1 var(--f-mono); opacity: .65 }
+.filter[aria-pressed="true"] { background: var(--ink); color: var(--paper) }
+.filter[aria-pressed="true"] .n { opacity: .9 }
+.hint { margin-left: auto; font-size: 13px; color: var(--muted) }
+
+/* ---------- tarjetas ---------- */
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px }
+.card { all: unset; box-sizing: border-box; cursor: pointer; display: flex; flex-direction: column; background: var(--panel); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--line); transition: transform .25s ease, box-shadow .25s ease }
+.card:hover { transform: translateY(-4px); box-shadow: 0 2px 4px rgba(0,0,0,.08), 0 18px 40px rgba(0,0,0,.16) }
+.card:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px }
+.card[hidden] { display: none }
+.cover { position: relative; aspect-ratio: 16 / 10; background: var(--accent); padding: 18px 18px 0; overflow: hidden }
+.cover img { width: 100%; height: 100%; object-fit: cover; object-position: top left; border-radius: 8px 8px 0 0; display: block; box-shadow: 0 -2px 18px rgba(0,0,0,.25); transition: transform .35s ease }
+.card:hover .cover img { transform: translateY(-6px) scale(1.02) }
+.cover .count { position: absolute; right: 12px; bottom: 12px; background: rgba(0,0,0,.7); color: #fff; font: 600 11px/1 var(--f-mono); padding: 6px 8px; border-radius: 6px }
+.card-body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1 }
+.card-body .client { font: 600 12px/1.3 var(--f-body); letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 8px }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex: none }
+.card-body h3 { font-size: 30px }
+.card-body p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.5 }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 8px }
+.tag { font: 600 11.5px/1 var(--f-body); padding: 6px 9px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); color: var(--ink) }
+.open { font: 600 13px/1 var(--f-body); color: var(--ink); display: inline-flex; gap: 6px; align-items: center; padding-top: 6px }
+.open::after { content: "→"; transition: transform .2s }
+.card:hover .open::after { transform: translateX(4px) }
+
+/* ---------- cómo trabajo ---------- */
+.how { padding-block: 40px 24px }
+.how h2 { font-size: clamp(40px, 5vw, 56px); margin-bottom: 18px }
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 2px solid var(--ink) }
+.step { padding: 18px 18px 6px 0 }
+.step b { font: 400 40px/1 var(--f-display); color: var(--sun); -webkit-text-stroke: 1px var(--ink) }
+.step h3 { font-size: 26px; margin: 8px 0 6px }
+.step p { margin: 0; color: var(--muted); font-size: 15px }
+
+.contact { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(22px, 4vw, 48px); align-items: start; margin-top: 48px; padding: clamp(24px, 4vw, 44px); background: var(--ink); color: var(--paper); border-radius: 18px }
+.contact .kicker { color: var(--sun) }
+.contact h2 { font-size: clamp(36px, 5vw, 56px); margin-top: 10px }
+.contact p { margin: 14px 0 0; opacity: .85; max-width: 46ch }
+.contact-list { display: grid; gap: 10px }
+.contact-item { display: grid; grid-template-columns: 96px minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 12px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); text-decoration: none; color: inherit }
+a.contact-item:hover { border-color: var(--sun) }
+.ci-label { font: 600 12px/1.2 var(--f-body); letter-spacing: 1.5px; text-transform: uppercase; color: var(--sun) }
+.ci-value { font: 500 15px/1.4 var(--f-mono); overflow-wrap: anywhere; user-select: all }
+.copy { background: var(--sun); color: var(--sun-ink); border: 0; border-radius: 8px; padding: 7px 10px; font: 600 13px/1 var(--f-body); cursor: pointer }
+footer { padding-block: 40px 60px; color: var(--muted); font-size: 14px; border-top: 2px solid var(--ink); margin-top: 48px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px }
+
+/* ---------- caso (pantalla completa) ---------- */
+dialog.case { width: min(1180px, 100vw); max-width: 100vw; max-height: 100vh; height: 100%; margin: 0 auto; padding: 0; border: 0; background: var(--paper); color: var(--ink) }
+dialog.case::backdrop { background: rgba(10,10,6,.75) }
+@media (min-width: 900px) { dialog.case { height: calc(100% - 48px); margin-top: 24px; border-radius: 18px } }
+.case-scroll { height: 100%; overflow-y: auto; overscroll-behavior: contain }
+.case-head { position: relative; background: var(--accent); color: var(--accent-ink); padding: clamp(26px, 5vw, 48px) clamp(16px, 4vw, 48px) clamp(24px, 4vw, 40px) }
+.case-head.diagonal { background: linear-gradient(115deg, #F4F8FA 0 38%, var(--accent) 38% 100%); color: #0E3A52 }
+.case-head.diagonal h2, .case-head.diagonal .case-sub { color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.2) }
+.case-head .kicker { color: inherit; opacity: .85 }
+.case-head h2 { font-size: clamp(40px, 6vw, 72px); margin-top: 10px; max-width: 18ch }
+.case-sub { margin-top: 10px; font-size: 17px; max-width: 60ch; opacity: .92 }
+.case-close { position: sticky; top: 0; z-index: 3; display: flex; justify-content: flex-end; height: 0 }
+.case-close button { margin: 14px 14px 0 0; background: var(--ink); color: var(--paper); border: 0; border-radius: 999px; width: 44px; height: 44px; font: 600 20px/1 var(--f-body); cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,.25) }
+.case-body { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(22px, 4vw, 44px); padding: clamp(22px, 4vw, 40px) clamp(16px, 4vw, 48px) }
+.case-text h4 { font: 600 12px/1.2 var(--f-body); letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin: 0 0 8px }
+.case-text section + section { margin-top: 22px }
+.case-text p { margin: 0 }
+.case-text ul { margin: 0; padding-left: 18px }
+.case-text li { margin-bottom: 6px }
+.result { border-left: 6px solid var(--sun); background: var(--panel); padding: 12px 16px; font-size: 15px; border-radius: 0 8px 8px 0 }
+.case-text .tags .tag { background: var(--panel) }
+.repo { font: 500 13px/1.5 var(--f-mono); overflow-wrap: anywhere }
+
+.viewer { position: sticky; top: 16px; align-self: start }
+.stage { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; aspect-ratio: 16 / 10 }
+.stage img { width: 100%; height: 100%; object-fit: contain; background: #fff; display: block }
+.nav { position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; border-radius: 50%; border: 0; background: rgba(22,21,15,.82); color: #fff; font: 600 20px/1 var(--f-body); cursor: pointer }
+.nav.prev { left: 10px } .nav.next { right: 10px }
+.nav[hidden] { display: none }
+.counter { position: absolute; left: 10px; bottom: 10px; background: rgba(22,21,15,.82); color: #fff; font: 600 12px/1 var(--f-mono); padding: 6px 8px; border-radius: 6px }
+.stage-cap { font-size: 14px; color: var(--muted); margin: 10px 2px 12px; min-height: 1.5em }
+.thumbs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px }
+.thumbs button { all: unset; cursor: pointer; flex: none; width: 96px; aspect-ratio: 16 / 10; border-radius: 6px; overflow: hidden; border: 2px solid transparent; opacity: .65 }
+.thumbs button[aria-current="true"] { border-color: var(--sun); opacity: 1 }
+.thumbs button:focus-visible { outline: 3px solid var(--sun) }
+.thumbs img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block }
+.privacy { font-size: 12.5px; color: var(--muted); margin-top: 8px }
+
+.case-foot { display: flex; justify-content: space-between; gap: 12px; padding: 18px clamp(16px, 4vw, 48px) 32px; border-top: 1px solid var(--line) }
+.case-foot button { max-width: 48%; text-align: left }
+.case-foot button:last-child { text-align: right; margin-left: auto }
+.case-foot small { display: block; font: 600 11px/1.2 var(--f-body); letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px }
+
+@media (max-width: 960px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)) } .steps { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
+@media (max-width: 820px) {
+  .hero { grid-template-columns: 1fr } .hero .photo { order: -1 }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)) } .stat:nth-child(3) { border-left: 0 } .stat:nth-child(n+3) { border-top: 1px solid var(--line) }
+  .case-body { grid-template-columns: 1fr } .viewer { position: static; order: -1 }
+  .hint { display: none }
+  .contact { grid-template-columns: 1fr }
+  .contact-item { grid-template-columns: 1fr auto } .ci-label { grid-column: 1 / -1 }
+}
+@media (max-width: 600px) { .grid, .steps { grid-template-columns: 1fr } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } .card, .cover img, .btn, .open::after { transition: none } }
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <div>
+      <div class="kicker">Portafolio · Cali, Colombia · Trabajo remoto</div>
+      <h1>Alejandro<br><span>Fernández Urbano</span></h1>
+      <p><b>Ingeniero mecatrónico y desarrollador.</b> Convierto procesos que viven en Excel, correo y papel en aplicaciones que la gente usa todos los días: Power Platform, Power BI, .NET, Python e IA en producción para salud, banca, farmacéutica, retail y auditoría.</p>
+      <div class="cta">
+        <a class="btn solid" href="#proyectos">Ver proyectos</a>
+        <a class="btn" href="#contacto">Contacto</a>
+        <a class="btn" href="https://github.com/alejandrofernandezurbano" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <img class="photo" src="img/foto.jpg" alt="Alejandro Fernández Urbano">
+  </header>
+
+  <div class="stats" role="list">
+    <div class="stat" role="listitem"><b>40+</b><span>flujos de Power Automate en producción</span></div>
+    <div class="stat" role="listitem"><b>5</b><span>apps de Power Apps para salud, banca y farma</span></div>
+    <div class="stat" role="listitem"><b>40.000+</b><span>transacciones bancarias procesadas con OCR + IA</span></div>
+    <div class="stat" role="listitem"><b>~45.000</b><span>líneas de Python en un SaaS de IA que opero</span></div>
+  </div>
+
+  <section class="projects" id="proyectos">
+    <div class="projects-head">
+      <h2>Proyectos</h2>
+      <p class="kicker" id="shown">11 proyectos</p>
+    </div>
+    <div class="filters" role="group" aria-label="Filtrar proyectos">
+      <button class="filter" data-f="todos" aria-pressed="true">Todos <span class="n"></span></button>
+      <button class="filter" data-f="power" aria-pressed="false">Power Platform <span class="n"></span></button>
+      <button class="filter" data-f="datos" aria-pressed="false">Datos y software <span class="n"></span></button>
+      <button class="filter" data-f="ia" aria-pressed="false">IA y visión <span class="n"></span></button>
+      <span class="hint">Abre un proyecto para ver el caso completo</span>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="how">
+    <h2>Cómo trabajo</h2>
+    <div class="steps">
+      <div class="step"><b>1</b><h3>Entender el proceso</h3><p>Me siento con quien lo usa: qué se hace hoy en Excel o correo y dónde se pierde tiempo.</p></div>
+      <div class="step"><b>2</b><h3>Prototipo en días</h3><p>Una primera versión que se puede tocar, para corregir antes de construir todo.</p></div>
+      <div class="step"><b>3</b><h3>Reglas y pruebas</h3><p>Las reglas de negocio se escriben y se prueban: nada de reservas cruzadas ni cifras inventadas.</p></div>
+      <div class="step"><b>4</b><h3>Producción y soporte</h3><p>Despliegue, capacitación al equipo y una segunda fase con lo que aparece en el uso real.</p></div>
+    </div>
+  </section>
+
+  <section class="contact" id="contacto">
+    <div>
+      <div class="kicker">Contacto</div>
+      <h2>¿Tienes un proceso que vive en Excel o en el correo?</h2>
+      <p>Cuéntame cómo se hace hoy y te digo cómo lo automatizaría. Respondo en menos de un día hábil, hora de Colombia.</p>
+    </div>
+    <div class="contact-list">
+      <a class="contact-item" href="https://wa.me/573184632292" target="_blank" rel="noopener"><span class="ci-label">WhatsApp</span><span class="ci-value">+57 318 463 2292</span></a>
+      <div class="contact-item"><span class="ci-label">Correo</span><span class="ci-value" id="mail">alejandrofernandezurbano@gmail.com</span><button type="button" class="copy" id="copy-mail">Copiar</button></div>
+      <a class="contact-item" href="https://www.linkedin.com/in/alejandro-fernandez-urbano" target="_blank" rel="noopener"><span class="ci-label">LinkedIn</span><span class="ci-value">linkedin.com/in/alejandro-fernandez-urbano</span></a>
+      <a class="contact-item" href="https://github.com/alejandrofernandezurbano" target="_blank" rel="noopener"><span class="ci-label">GitHub</span><span class="ci-value">github.com/alejandrofernandezurbano</span></a>
+    </div>
+  </section>
+
+  <footer>
+    <span>Alejandro Fernández Urbano · Ingeniero mecatrónico · Cali, Colombia</span>
+    <span>Pantallazos de proyectos reales con los datos personales ocultos.</span>
+  </footer>
+</div>
+
+<dialog class="case" id="case" aria-labelledby="case-title">
+  <div class="case-scroll" id="case-scroll">
+    <div class="case-close"><button type="button" id="case-x" aria-label="Cerrar caso">✕</button></div>
+    <header class="case-head" id="case-head">
+      <div class="kicker" id="case-kicker"></div>
+      <h2 id="case-title"></h2>
+      <div class="case-sub" id="case-sub"></div>
+    </header>
+    <div class="case-body">
+      <div class="case-text" id="case-text"></div>
+      <div class="viewer">
+        <div class="stage">
+          <img id="stage-img" alt="">
+          <button class="nav prev" id="prev" aria-label="Imagen anterior">‹</button>
+          <button class="nav next" id="next" aria-label="Imagen siguiente">›</button>
+          <span class="counter" id="counter"></span>
+        </div>
+        <div class="stage-cap" id="stage-cap"></div>
+        <div class="thumbs" id="thumbs"></div>
+        <div class="privacy" id="privacy"></div>
+      </div>
+    </div>
+    <div class="case-foot">
+      <button class="btn" id="prev-case"></button>
+      <button class="btn" id="next-case"></button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+var P = [
+ { id: "turnos", f: "power", accent: "#0F4C68", ink: "#FFFFFF", client: "Imágenes Diagnósticas San José", sector: "Salud · Imágenes diagnósticas", year: "2024 – 2025",
+   title: "Mallas de turnos y liquidación de horas extras",
+   card: "Turnos por sede, alertas de exceso de horas y liquidación de recargos, en lugar del Excel de siempre.",
+   reto: "Los turnos de los tecnólogos de cada sede se armaban a mano en Excel, y las horas extras y recargos se sumaban a mano cada mes.",
+   hice: ["Malla mensual por sede (HUV, Buga) con filtros por recurso y cargo.", "Alerta cuando alguien excede las horas laborales, con la recomendación de a quién asignar el turno: quien lleva menos horas.", "Catálogo de más de 40 tipos de turno con duración y horario, vacaciones y novedades.", "Resumen semanal (horas, extras, domingos, festivos, nocturnas) y liquidación de recargos y horas extras con sus factores."],
+   tech: ["Power Apps", "SharePoint", "Reglas laborales"],
+   imgs: [["turnos-malla", "Malla mensual de turnos por sede"], ["turnos-novedades", "Novedades: alerta de exceso de horas con recomendación"], ["turnos-liquidacion", "Liquidación de recargos y horas extras"], ["turnos-tipos", "Catálogo de tipos de turno"], ["turnos-vacaciones", "Vacaciones del personal"]],
+   privacy: "Nombres, cédulas y salarios ocultos." },
+ { id: "reservas", f: "power", accent: "#0B4A2B", ink: "#FFFFFF", client: "Fundación Valle del Lili", sector: "Salud · Hospital de alta complejidad", year: "2024",
+   title: "Reservas de espacios con reglas de negocio",
+   card: "Auditorio, salas, salas de lactancia y puestos sin cruces ni reservas duplicadas.",
+   reto: "Las reservas de auditorio, salas de las torres y casas contiguas se cruzaban y no había forma de ver la ocupación real.",
+   hice: ["Calendario por mes o semana, con filtros por tipo de recurso y sala.", "Reglas: nada en fechas pasadas, máximo de días por reserva, reservas constantes y límites según el tipo de usuario.", "Excepciones con justificación que pasan a aprobación del administrador.", "«Mis reservas», administración y reportes de ocupación."],
+   tech: ["Power Apps", "SharePoint", "Power Automate", "Power BI"],
+   imgs: [["reservas-calendario", "Calendario de reservas del mes"], ["reservas-nueva", "Nueva reserva con los equipos del espacio"]] },
+ { id: "polizas", f: "power", accent: "#B8141F", ink: "#FFFFFF", client: "Bancoomeva", sector: "Banca · Seguros", year: "2025 – 2026",
+   title: "Administración de endosos de pólizas",
+   card: "Cada póliza que respalda un crédito, desde la solicitud hasta el endoso, con visto bueno y certificados.",
+   reto: "Las pólizas de vida, hogar y vehículo que respaldan créditos se gestionaban por correo, sin estados claros ni historial.",
+   hice: ["Solicitudes nuevas y de renovación con visto bueno del gerente.", "Gestión por estados (en revisión por Operaciones de Crédito y Cartera, devuelta, exonerada) e historial completo.", "Carátula, certificado de pago y certificado de beneficiario en PDF por póliza.", "Flujos que guardan los documentos en SharePoint y registran cada éxito o error."],
+   tech: ["Power Apps", "Power Automate", "SharePoint", "Versión 3.0"],
+   imgs: [["polizas-solicitudes", "Gestión de solicitudes con filtros y documentos"], ["polizas-menu", "Menú principal"], ["polizas-formulario", "Póliza con solicitud de visto bueno"], ["polizas-flujo", "Flujo con registro de éxito y error"]],
+   privacy: "Datos de clientes ocultos." },
+ { id: "ictq", f: "power", accent: "#0A5FAE", ink: "#FFFFFF", client: "Tecnoquímicas · ICTQ", sector: "Farmacéutica · Investigación de mercados", year: "2024",
+   title: "Investigación corporativa con aprobaciones",
+   card: "Plan de investigaciones por marca y país, aprobaciones y avisos automáticos.",
+   reto: "Las propuestas de investigación de cada negocio y marca pasaban por correo, sin un plan único ni trazabilidad de las aprobaciones.",
+   hice: ["Sitio de SharePoint con el plan de investigación por año, negocio, marca y país.", "App «Plan de Investigaciones» para registrar cada estudio con su costo y responsable.", "App «Aprobaciones» y correos automáticos con la decisión, el revisor y el siguiente paso."],
+   tech: ["SharePoint", "Power Apps", "Power Automate"],
+   imgs: [["ictq-sharepoint", "Sitio de SharePoint: plan de investigación"], ["ictq-plan", "App Plan de Investigaciones"], ["ictq-aprobaciones", "App Aprobaciones"], ["ictq-correo", "Correo automático de aprobación"]],
+   privacy: "Nombres de personas ocultos." },
+ { id: "rpa", f: "power", accent: "#1F6E43", ink: "#FFFFFF", client: "Bancoomeva", sector: "Banca · Automatización (RPA)", year: "2025 – 2026",
+   title: "Consolidado automático de documentos",
+   card: "Un robot que descarga carpetas, une los PDF y registra cada archivo en la base de datos.",
+   reto: "Armar el consolidado de documentos era descargar carpetas una por una y unir archivos a mano.",
+   hice: ["Configuración leída de una tabla, sin rutas fijas en el robot.", "Scripts de Python para descargar y unir PDF, y de PowerShell para las carpetas.", "Registro en SQL y subflujos de log para saber qué se procesó y qué falló."],
+   tech: ["Power Automate Desktop", "Python", "PowerShell", "SQL"],
+   imgs: [["rpa-bucle", "Recorrido de resultados con registro en SQL"], ["rpa-variables", "Variables de configuración y scripts"]] },
+ { id: "ventas", f: "datos", accent: "#3F8A1C", ink: "#FFFFFF", client: "Cadena de supermercados", sector: "Retail · Analítica", year: "2025",
+   title: "Tableros de ventas, margen y sedes",
+   card: "Venta contra presupuesto día a día, margen por sublínea y cumplimiento de cada sede.",
+   reto: "La gerencia necesitaba ver cada día cómo iba la venta contra el presupuesto, qué líneas dejaban margen y qué sedes cumplían.",
+   hice: ["Indicadores: venta acumulada sin IVA contra presupuesto por día, % de cumplimiento, facturas, ticket promedio y venta proyectada del mes.", "Cumplimiento por línea (fruver y carnes) y participación de cada línea en la venta.", "Margen de contribución por sublínea: unidades, crecimiento contra el año anterior, costo y utilidad.", "Consolidado por sede con presupuesto, proyección y rentabilidad, más seguimiento diario, comparativos y detalle por producto."],
+   result: "Más de 9 páginas de análisis con filtros por tipo de inventario, línea, proveedor, canal, año y mes.",
+   tech: ["Power BI", "DAX", "Modelo de datos", "Presupuesto vs. real"],
+   imgs: [["ventas-indicadores", "Indicadores del mes: venta vs. presupuesto"], ["ventas-margen", "Margen de contribución por sublínea"], ["ventas-sedes", "Consolidado de cumplimiento y rentabilidad por sede"]],
+   privacy: "Logo del cliente oculto." },
+ { id: "bioeticos", f: "datos", accent: "#2E86B5", ink: "#FFFFFF", diagonal: true, client: "Bioéticos", sector: "Laboratorio · Fórmulas magistrales", year: "2024",
+   title: "Aplicación web por capas",
+   card: "Aplicación web para un laboratorio de fórmulas magistrales, con acceso por usuario y motor de reportes.",
+   reto: "El laboratorio necesitaba su propia aplicación web, con acceso por usuario y reportes, que se pudiera mantener y crecer.",
+   hice: ["Arquitectura en capas: web (MVC), reglas de negocio, modelos, acceso a datos y motor de reportes.", "Entity Framework para el acceso a datos.", "Diseño del inicio de sesión con la identidad de la marca."],
+   tech: ["C#", "ASP.NET MVC", "Entity Framework"],
+   repo: ["https://github.com/alejandrofernandezurbano/Bioeticos_Git", "github.com/alejandrofernandezurbano/Bioeticos_Git"],
+   imgs: [["bioeticos-login", "Inicio de sesión con la identidad de la marca"], ["bioeticos-arquitectura", "Arquitectura de la solución"]] },
+ { id: "pagos", f: "datos", accent: "#24231C", ink: "#F2C230", client: "Operador de telecomunicaciones", sector: "Pagos · Integración", year: "2026",
+   title: "Enlaces de pago por API",
+   card: "Servicio REST que genera el enlace de pago a partir de la factura, con firma y manejo de errores.",
+   reto: "Integrar la generación de enlaces de pago con el sistema de facturación, de forma segura.",
+   hice: ["Petición firmada con los datos de la factura y respuesta con el enlace de pago.", "Pruebas de autenticación y de errores (200 / 401) antes de conectar el sistema."],
+   tech: ["APIs REST", "JSON", "Postman"],
+   imgs: [["pagos-enlace", "Prueba de la API: respuesta 200 con el enlace generado"]],
+   privacy: "Dirección del servicio y datos de la petición ocultos." },
+ { id: "agente", f: "ia", accent: "#F2C230", ink: "#16150F", client: "Proyecto propio", sector: "SaaS · En producción", year: "2026",
+   title: "Agente de ventas con IA y CRM propio",
+   card: "Un agente que no solo conversa: ofrece, registra compras, hace seguimiento y sabe cuándo pasar a una persona.",
+   reto: "Atender y vender a los clientes de una creadora de contenido digital las 24 horas sin perder el tono ni el control.",
+   hice: ["La IA redacta y las reglas de negocio deciden qué sale solo y qué pasa a una persona.", "Ofrece productos, registra compras, programa seguimientos y marca a cada cliente en su CRM.", "Modelo elegido según el costo, prompt caching y proveedores intercambiables."],
+   result: "Unas 45.000 líneas de Python y más de 600 pruebas automáticas.",
+   tech: ["Python", "Claude / OpenAI", "Webhooks", "SQLite"],
+   repo: ["https://github.com/alejandrofernandezurbano/conversational-ai-crm-case-study", "Caso de estudio en GitHub"],
+   imgs: [["ia-agente", "Actividad del agente (recreación con datos de ejemplo)"]] },
+ { id: "ocr", f: "ia", accent: "#2A2922", ink: "#F2EFE3", client: "Firma de auditoría internacional", sector: "Auditoría · Contabilidad", year: "",
+   title: "De extracto bancario a contabilidad con OCR + IA",
+   card: "PDF → OCR → IA → JSON validado → QuickBooks. La persona solo revisa lo dudoso.",
+   reto: "Digitar extractos bancarios en la contabilidad tomaba días cada mes y dejaba errores.",
+   hice: ["Extracto en PDF o API del banco, OCR y un modelo de lenguaje que identifica quién pagó, a quién y por qué.", "Validación con reglas antes de cargar a QuickBooks; lo dudoso va a una cola de revisión humana.", "Procesar dos veces el mismo extracto nunca duplica registros."],
+   result: "40.000+ transacciones procesadas y 3 a 5 días de digitación eliminados cada mes.",
+   tech: ["Python", "OCR", "LLM", "QuickBooks API"],
+   repo: ["https://github.com/alejandrofernandezurbano/invoice-ai-to-accounting", "Versión pública con datos ficticios"],
+   imgs: [["ia-ocr-flujo", "El flujo completo"], ["ia-ocr-consola", "La persona solo revisa lo dudoso"]] },
+ { id: "tesis", f: "ia", accent: "#101010", ink: "#7CD992", client: "Universidad Autónoma de Occidente", sector: "Tesis · Visión 3D", year: "",
+   title: "Personas en 3D con cámara y LiDAR",
+   card: "Fusión de cámara y LiDAR en tiempo real sobre ROS2 para detectar y seguir personas.",
+   reto: "Detectar y seguir personas en 3D en tiempo real combinando lo que ve la cámara con la nube de puntos del LiDAR.",
+   hice: ["Detección con YOLOv4 en la imagen y PointRCNN en la nube de puntos.", "Proyección de la nube de puntos a la cámara y asociación de detecciones.", "Seguimiento con Deep SORT sobre ROS2."],
+   tech: ["Python", "ROS2", "YOLOv4", "Open3D / PCL"],
+   repo: ["https://github.com/alejandrofernandezurbano/tracker_fusion", "tracker_fusion en GitHub"],
+   imgs: [["tesis-lidar", "Simulación y nube de puntos con personas detectadas en 3D"]] }
+];
+
+(function () {
+  var grid = document.getElementById('grid'), dlg = document.getElementById('case'), cur = -1, img = 0, visible = P.slice();
+  function el(t, c, h) { var e = document.createElement(t); if (c) e.className = c; if (h != null) e.innerHTML = h; return e; }
+  function src(n) { return 'img/' + n + '.jpg'; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  P.forEach(function (p, i) {
+    var b = el('button', 'card'); b.dataset.f = p.f; b.style.setProperty('--accent', p.accent);
+    b.setAttribute('aria-label', 'Abrir caso: ' + p.title);
+    b.innerHTML = '<div class="cover"><img src="' + src(p.imgs[0][0]) + '" alt="" loading="lazy"><span class="count">' + p.imgs.length + (p.imgs.length > 1 ? ' imágenes' : ' imagen') + '</span></div>' +
+      '<div class="card-body"><div class="client"><span class="dot"></span>' + esc(p.client) + '</div><h3>' + esc(p.title) + '</h3><p>' + esc(p.card) + '</p>' +
+      '<div class="tags">' + p.tech.map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join('') + '</div><span class="open">Ver caso</span></div>';
+    b.addEventListener('click', function () { openCase(i); });
+    grid.appendChild(b);
+  });
+
+  // filtros con conteo
+  var filters = document.querySelectorAll('.filter');
+  filters.forEach(function (f) {
+    var k = f.dataset.f; f.querySelector('.n').textContent = k === 'todos' ? P.length : P.filter(function (p) { return p.f === k; }).length;
+    f.addEventListener('click', function () {
+      filters.forEach(function (x) { x.setAttribute('aria-pressed', x === f ? 'true' : 'false'); });
+      var n = 0; visible = [];
+      grid.querySelectorAll('.card').forEach(function (c, i) { var on = k === 'todos' || c.dataset.f === k; c.hidden = !on; if (on) { n++; visible.push(P[i]); } });
+      document.getElementById('shown').textContent = n + (n === 1 ? ' proyecto' : ' proyectos');
+    });
+  });
+
+  function show(i) {
+    var p = P[cur]; img = (i + p.imgs.length) % p.imgs.length;
+    var s = document.getElementById('stage-img'); s.src = src(p.imgs[img][0]); s.alt = p.imgs[img][1];
+    document.getElementById('stage-cap').textContent = p.imgs[img][1];
+    document.getElementById('counter').textContent = (img + 1) + ' / ' + p.imgs.length;
+    document.getElementById('prev').hidden = document.getElementById('next').hidden = p.imgs.length < 2;
+    document.querySelectorAll('#thumbs button').forEach(function (t, k) { t.setAttribute('aria-current', k === img ? 'true' : 'false'); });
+  }
+  function openCase(i) {
+    cur = i; var p = P[i], head = document.getElementById('case-head');
+    head.style.setProperty('--accent', p.accent); head.style.setProperty('--accent-ink', p.ink);
+    head.classList.toggle('diagonal', !!p.diagonal);
+    document.getElementById('case-kicker').textContent = [p.client, p.sector, p.year].filter(Boolean).join(' · ');
+    document.getElementById('case-title').textContent = p.title;
+    document.getElementById('case-sub').textContent = p.card;
+    var t = '<section><h4>El reto</h4><p>' + esc(p.reto) + '</p></section>' +
+      '<section><h4>Qué construí</h4><ul>' + p.hice.map(function (h) { return '<li>' + esc(h) + '</li>'; }).join('') + '</ul></section>' +
+      (p.result ? '<section><h4>Resultado</h4><div class="result">' + esc(p.result) + '</div></section>' : '') +
+      '<section><h4>Tecnología</h4><div class="tags">' + p.tech.map(function (x) { return '<span class="tag">' + esc(x) + '</span>'; }).join('') + '</div></section>' +
+      (p.repo ? '<section><h4>Código</h4><div class="repo"><a href="' + p.repo[0] + '" target="_blank" rel="noopener">' + esc(p.repo[1]) + '</a></div></section>' : '');
+    document.getElementById('case-text').innerHTML = t;
+    var th = document.getElementById('thumbs'); th.innerHTML = '';
+    p.imgs.forEach(function (m, k) {
+      var b = el('button'); b.setAttribute('aria-label', 'Ver imagen ' + (k + 1) + ': ' + m[1]);
+      b.innerHTML = '<img src="' + src(m[0]) + '" alt="">'; b.addEventListener('click', function () { show(k); }); th.appendChild(b);
+    });
+    th.hidden = p.imgs.length < 2;
+    document.getElementById('privacy').textContent = p.privacy || '';
+    var vi = visible.indexOf(p), pv = visible[(vi - 1 + visible.length) % visible.length], nx = visible[(vi + 1) % visible.length];
+    document.getElementById('prev-case').innerHTML = '<span><small>Anterior</small>' + esc(pv.title) + '</span>';
+    document.getElementById('next-case').innerHTML = '<span><small>Siguiente</small>' + esc(nx.title) + '</span>';
+    document.getElementById('prev-case').onclick = function () { openCase(P.indexOf(pv)); };
+    document.getElementById('next-case').onclick = function () { openCase(P.indexOf(nx)); };
+    show(0);
+    document.getElementById('case-scroll').scrollTop = 0;
+    if (!dlg.open) { dlg.showModal ? dlg.showModal() : dlg.setAttribute('open', ''); document.body.style.overflow = 'hidden'; }
+    try { history.replaceState(null, '', '#' + p.id); } catch (e) {}
+  }
+  function closeCase() { if (dlg.open) dlg.close(); }
+  dlg.addEventListener('close', function () { document.body.style.overflow = ''; try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {} });
+  document.getElementById('case-x').addEventListener('click', closeCase);
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) closeCase(); });
+  document.getElementById('prev').addEventListener('click', function () { show(img - 1); });
+  document.getElementById('next').addEventListener('click', function () { show(img + 1); });
+  document.addEventListener('keydown', function (e) {
+    if (!dlg.open) return;
+    if (e.key === 'ArrowRight') show(img + 1);
+    if (e.key === 'ArrowLeft') show(img - 1);
+  });
+  // deslizar en el celular
+  var x0 = null, stage = document.querySelector('.stage');
+  stage.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  stage.addEventListener('touchend', function (e) { if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) show(img + (dx < 0 ? 1 : -1)); x0 = null; });
+  var cm = document.getElementById('copy-mail');
+  cm.addEventListener('click', function () {
+    var t = document.getElementById('mail').textContent;
+    function sel() { var r = document.createRange(); r.selectNodeContents(document.getElementById('mail')); var s = getSelection(); s.removeAllRanges(); s.addRange(r); cm.textContent = 'Selecciónalo y cópialo'; }
+    try { navigator.clipboard.writeText(t).then(function () { cm.textContent = 'Copiado'; setTimeout(function () { cm.textContent = 'Copiar'; }, 1800); }, sel); } catch (e) { sel(); }
+  });
+  // abrir desde el enlace (#turnos, #polizas…)
+  var h = (location.hash || '').slice(1), k = P.findIndex(function (p) { return p.id === h; });
+  if (k >= 0) openCase(k);
+})();
+</script>
+
+</html>
